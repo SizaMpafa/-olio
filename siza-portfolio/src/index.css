@@ -1532,3 +1532,86 @@ footer {
     padding: 0.4rem 0.8rem;
   }
 }
+
+/* Nav right container */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Desktop CV Button - INSTANTLY VISIBLE */
+.cv-btn-desktop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, var(--gold), #ffed4e);
+  color: var(--bg-primary);
+  text-decoration: none;
+  border-radius: 50px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+  animation: cvPulse 2s ease-in-out infinite;
+}
+
+@keyframes cvPulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3); }
+  50% { box-shadow: 0 4px 25px rgba(241, 196, 15, 0.5); }
+}
+
+.cv-btn-desktop:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(241, 196, 15, 0.4);
+}
+
+.cv-icon {
+  font-size: 1rem;
+}
+
+.cv-text {
+  display: inline;
+}
+
+/* Mobile CV Button in menu */
+.cv-btn-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--gold), #ffed4e);
+  color: var(--bg-primary);
+  text-decoration: none;
+  border-radius: 50px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(241, 196, 15, 0.3);
+}
+
+/* Mobile: Hide desktop CV, show in menu instead */
+@media (max-width: 768px) {
+  .cv-btn-desktop {
+    display: none;
+  }
+  
+  .nav-right {
+    gap: 1rem;
+  }
+}
+
+/* Desktop: Keep CV visible */
+@media (min-width: 769px) {
+  .cv-btn-mobile {
+    display: none;
+  }
+}
