@@ -16,7 +16,11 @@ const Navbar = () => {
   return (
     <>
       <nav>
-        <a href="#top" className="logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>siza m!</a>
+        <a href="#top" className="logo" onClick={(e) => { 
+          e.preventDefault(); 
+          window.scrollTo({ top: 0, behavior: 'smooth' }); 
+          closeMobileMenu();
+        }}>siza m!</a>
         <ul className="nav-links">
           <li><a href="#story">Story</a></li>
           <li><a href="#projects">Work</a></li>
