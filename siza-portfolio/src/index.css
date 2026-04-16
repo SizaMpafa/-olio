@@ -1460,3 +1460,75 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Mobile Constellation Styles */
+.mobile-constellation {
+  height: 320px !important;
+  max-width: 320px !important;
+  margin: 0 auto !important;
+  position: relative;
+  overflow: visible !important;
+}
+
+.mobile-constellation .skill-node.mobile-skill {
+  font-size: 0.6rem;
+  padding: 0.35rem 0.7rem;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  z-index: 3;
+}
+
+.mobile-constellation .skill-node.mobile-skill:hover {
+  background: var(--accent);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.mobile-constellation .skill-node.mobile-core {
+  background: linear-gradient(135deg, var(--accent), #ec4899);
+  color: white;
+  border: none;
+  font-weight: 700;
+  z-index: 2;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.mobile-constellation .constellation-line.mobile-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-glow), transparent);
+  z-index: 0;
+}
+
+.nine-pointed-star {
+  filter: drop-shadow(0 0 10px var(--accent-glow));
+  animation: starPulse 3s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+  0%, 100% { 
+    filter: drop-shadow(0 0 10px var(--accent-glow));
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% { 
+    filter: drop-shadow(0 0 20px var(--accent-glow));
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 380px) {
+  .mobile-constellation {
+    height: 280px !important;
+    max-width: 280px !important;
+    transform: scale(0.9);
+  }
+  
+  .mobile-constellation .skill-node.mobile-skill {
+    font-size: 0.55rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .mobile-constellation .skill-node.mobile-core {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
