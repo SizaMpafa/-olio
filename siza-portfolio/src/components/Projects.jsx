@@ -40,8 +40,8 @@ const Projects = () => {
             </div>
             <div className="project-links">
               <a href="https://github.com/Genius574/moodmosaic" target="_blank" className="btn-small btn-outline" rel="noreferrer">GitHub</a>
-              <a href="#" className="btn-small btn-primary">Live Demo</a>
             </div>
+            <div className="tap-hint">👆 Tap for details</div>
           </div>
         </div>
         <div className="project-card reveal">
@@ -60,6 +60,7 @@ const Projects = () => {
             <div className="project-links">
               <a href="https://github.com/Genius574/STAGEIT" target="_blank" className="btn-small btn-outline" rel="noreferrer">GitHub</a>
             </div>
+            <div className="tap-hint">👆 Tap for details</div>
           </div>
         </div>
         <div className="project-card reveal">
@@ -78,6 +79,7 @@ const Projects = () => {
             <div className="project-links">
               <a href="https://github.com/D3konR3kon/Ukhanyo_SMS_Client-Student" target="_blank" className="btn-small btn-outline" rel="noreferrer">GitHub</a>
             </div>
+            <div className="tap-hint">👆 Tap for details</div>
           </div>
         </div>
         <div className="project-card reveal">
@@ -96,6 +98,7 @@ const Projects = () => {
             <div className="project-links">
               <a href="https://github.com/SizaMpafa/M-Tutorials" target="_blank" className="btn-small btn-outline" rel="noreferrer">GitHub</a>
             </div>
+            <div className="tap-hint">👆 Tap for details</div>
           </div>
         </div>
         <div className="project-card reveal">
@@ -114,6 +117,7 @@ const Projects = () => {
             <div className="project-links">
               <a href="https://github.com/SizaMpafa/impulsive_shopping_b_f" target="_blank" className="btn-small btn-outline" rel="noreferrer">GitHub</a>
             </div>
+            <div className="tap-hint">👆 Tap for details</div>
           </div>
         </div>
         <div className="project-card reveal" style={{borderColor: 'rgba(255, 0, 51, 0.3)'}}>
@@ -130,6 +134,7 @@ const Projects = () => {
             <div className="project-links">
               <a href="https://github.com/SizaMpafa/vip-vibez" target="_blank" className="btn-small btn-red-outline" rel="noreferrer">GitHub</a>
             </div>
+            <div className="tap-hint" style={{color: 'var(--red)'}}>👆 Tap for details</div>
           </div>
         </div>
       </div>

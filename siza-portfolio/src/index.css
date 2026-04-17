@@ -1615,3 +1615,129 @@ footer {
     display: none;
   }
 }
+
+/* Project Card Z-Index Fixes */
+.project-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  z-index: 1; /* Behind the info */
+}
+
+.project-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2.5rem;
+  background: linear-gradient(to top, rgba(10, 10, 15, 0.98), rgba(10, 10, 15, 0.8), transparent);
+  transform: translateY(65%);
+  transition: transform 0.4s ease;
+  z-index: 2; /* Above the visual */
+}
+
+.project-card:hover .project-info,
+.project-card:active .project-info {
+  transform: translateY(0);
+}
+
+/* Make sure all text elements are above background */
+.project-context,
+.project-name,
+.project-desc,
+.project-stack,
+.project-links {
+  position: relative;
+  z-index: 3;
+}
+
+/* Tap Hint - Always visible on mobile */
+.tap-hint {
+  display: none;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--card-border);
+  opacity: 0.8;
+  position: relative;
+  z-index: 3;
+}
+
+/* Mobile: Always show info, no hover needed */
+@media (max-width: 768px) {
+  .project-info {
+    transform: translateY(0);
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.7) 60%, transparent 100%);
+    padding: 1.5rem;
+  }
+  
+  .project-context,
+  .project-desc,
+  .project-stack,
+  .project-links {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .tap-hint {
+    display: block;
+  }
+  
+  /* Slightly dimmed state before tap */
+  .project-card .project-context,
+  .project-card .project-desc,
+  .project-card .project-stack,
+  .project-card .project-links {
+    opacity: 0.7;
+  }
+  
+  /* Full brightness on tap/hover */
+  .project-card:active .project-context,
+  .project-card:active .project-desc,
+  .project-card:active .project-stack,
+  .project-card:active .project-links,
+  .project-card:focus .project-context,
+  .project-card:focus .project-desc,
+  .project-card:focus .project-stack,
+  .project-card:focus .project-links {
+    opacity: 1;
+  }
+}
+
+/* Desktop: Keep hover behavior, hide tap hint */
+@media (min-width: 769px) {
+  .tap-hint {
+    display: none;
+  }
+  
+  .project-info {
+    transform: translateY(65%);
+  }
+  
+  .project-card:hover .project-info {
+    transform: translateY(0);
+  }
+  
+  .project-context,
+  .project-desc,
+  .project-stack,
+  .project-links {
+    opacity: 0;
+  }
+  
+  .project-card:hover .project-context,
+  .project-card:hover .project-desc,
+  .project-card:hover .project-stack,
+  .project-card:hover .project-links {
+    opacity: 1;
+  }
+}
