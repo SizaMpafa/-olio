@@ -1627,7 +1627,7 @@ footer {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #1a1a2e, #16213e);
-  z-index: 1; /* Behind the info */
+  z-index: 1;
 }
 
 .project-info {
@@ -1639,11 +1639,12 @@ footer {
   background: linear-gradient(to top, rgba(10, 10, 15, 0.98), rgba(10, 10, 15, 0.8), transparent);
   transform: translateY(65%);
   transition: transform 0.4s ease;
-  z-index: 2; /* Above the visual */
+  z-index: 2;
 }
 
+/* Show info on hover (desktop) or when expanded class is present */
 .project-card:hover .project-info,
-.project-card:active .project-info {
+.project-card.expanded .project-info {
   transform: translateY(0);
 }
 
@@ -1657,74 +1658,10 @@ footer {
   z-index: 3;
 }
 
-/* Tap Hint - Always visible on mobile */
-.tap-hint {
-  display: none;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  color: var(--accent);
-  text-align: center;
-  margin-top: 1rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--card-border);
-  opacity: 0.8;
-  position: relative;
-  z-index: 3;
-}
-
-/* Mobile: Always show info, no hover needed */
-@media (max-width: 768px) {
-  .project-info {
-    transform: translateY(0);
-    background: linear-gradient(to top, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.7) 60%, transparent 100%);
-    padding: 1.5rem;
-  }
-  
-  .project-context,
-  .project-desc,
-  .project-stack,
-  .project-links {
-    opacity: 1;
-    transition: opacity 0.3s ease;
-  }
-  
-  .tap-hint {
-    display: block;
-  }
-  
-  /* Slightly dimmed state before tap */
-  .project-card .project-context,
-  .project-card .project-desc,
-  .project-card .project-stack,
-  .project-card .project-links {
-    opacity: 0.7;
-  }
-  
-  /* Full brightness on tap/hover */
-  .project-card:active .project-context,
-  .project-card:active .project-desc,
-  .project-card:active .project-stack,
-  .project-card:active .project-links,
-  .project-card:focus .project-context,
-  .project-card:focus .project-desc,
-  .project-card:focus .project-stack,
-  .project-card:focus .project-links {
-    opacity: 1;
-  }
-}
-
-/* Desktop: Keep hover behavior, hide tap hint */
+/* Desktop: Hide details by default, show on hover */
 @media (min-width: 769px) {
   .tap-hint {
     display: none;
-  }
-  
-  .project-info {
-    transform: translateY(65%);
-  }
-  
-  .project-card:hover .project-info {
-    transform: translateY(0);
   }
   
   .project-context,
@@ -1732,6 +1669,7 @@ footer {
   .project-stack,
   .project-links {
     opacity: 0;
+    transition: opacity 0.4s ease;
   }
   
   .project-card:hover .project-context,
@@ -1739,5 +1677,42 @@ footer {
   .project-card:hover .project-stack,
   .project-card:hover .project-links {
     opacity: 1;
+  }
+}
+
+/* Mobile: Tap to expand behavior */
+@media (max-width: 768px) {
+  .project-info {
+    padding: 1.5rem;
+  }
+  .project-card.expanded, .project-card:hover{
+    .tap-hint {
+    display: none;
+  }
+  }
+  
+  /* Hidden by default on mobile too */
+  .project-context,
+  .project-desc,
+  .project-stack,
+  .project-links {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .project-name{
+    margin-bottom: 0.1rem;
+  }
+  /* Show when expanded class is present */
+  .project-card.expanded .project-context,
+  .project-card.expanded .project-desc,
+  .project-card.expanded .project-stack,
+  .project-card.expanded .project-links {
+    opacity: 1;
+  }
+  
+  /* Visual feedback when tapped */
+  .project-card.expanded {
+    border-color: var(--accent);
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
   }
 }
