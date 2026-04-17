@@ -24,7 +24,7 @@ const Navbar = () => {
         
         {/* Desktop: CV button visible in nav */}
         <div className="nav-right">
-          <a href="/cv-siza-mpafa.pdf" download className="cv-btn-desktop">
+          <a href="/cv.pdf" download className="cv-btn-desktop">
             <span className="cv-icon">📄</span>
             <span className="cv-text">CV</span>
           </a>
@@ -47,7 +47,7 @@ const Navbar = () => {
       {/* Mobile menu */}
       <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
         {/* Mobile: CV button at top of menu */}
-        <a href="/cv-siza-mpafa.pdf" download className="cv-btn-mobile" onClick={closeMobileMenu}>
+        <a href="/cv.pdf" download className="cv-btn-mobile" onClick={closeMobileMenu}>
           <span>📄</span> Download CV
         </a>
         <a href="#story" onClick={closeMobileMenu}>Story</a>
