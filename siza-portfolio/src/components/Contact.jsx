@@ -1,8 +1,17 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Contact = () => {
   const sectionRef = useRef(null);
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Scroll reveal animation
   useEffect(() => {
     const reveals = sectionRef.current.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
@@ -17,9 +26,152 @@ const Contact = () => {
     return () => observer.disconnect();
   }, []);
 
+  const handleChange = (e) => {
+    setFormState(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus({ type: '', message: '' });
+
+    try {
+      const formData = new FormData();
+      formData.append('access_key', '691ebc02-1c02-4f8b-89a3-0cba208e85c4');
+      formData.append('name', formState.name);
+      formData.append('email', formState.email);
+      formData.append('subject', formState.subject);
+      formData.append('message', formState.message);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus({ type: 'success', message: 'Message sent successfully! I\'ll get back to you soon.' });
+        setFormState({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
+      }
+    } catch (error) {
+      setStatus({ type: 'error', message: 'Network error. Please check your connection.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="contact-section" id="contact" ref={sectionRef}>
-      <h2 className="contact-cta reveal">Let's build<br/><span>something great</span></h2>
+      <h2 className="contact-cta reveal">
+        Let's build<br/><span>something great</span>
+      </h2>
+      
+      {/* Contact Form */}
+      <form onSubmit={handleSubmit} className="contact-form reveal">
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formState.name}
+              onChange={handleChange}
+              required
+              placeholder="Name Surname"
+              disabled={isSubmitting}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formState.email}
+              onChange={handleChange}
+              required
+              placeholder="youremail@example.com"
+              disabled={isSubmitting}
+            />
+          </div>
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="subject">Subject</label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            value={formState.subject}
+            onChange={handleChange}
+            required
+            placeholder="Project Collaboration"
+            disabled={isSubmitting}
+          />
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            value={formState.message}
+            onChange={handleChange}
+            required
+            rows="5"
+            placeholder="Tell me about your project, timeline, and how I can help..."
+            disabled={isSubmitting}
+          />
+        </div>
+
+        <button 
+          type="submit" 
+          className={`form-submit-btn ${isSubmitting ? 'submitting' : ''}`}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <span className="spinner"></span>
+              Sending...
+            </>
+          ) : (
+            <>
+              Send Message
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </>
+          )}
+        </button>
+
+        {status.message && (
+          <div className={`form-status ${status.type}`}>
+            {status.type === 'success' ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            )}
+            {status.message}
+          </div>
+        )}
+      </form>
+
+      {/* Direct Contact Links */}
       <div className="contact-links reveal">
         <a href="mailto:sizampafa972@gmail.com" className="contact-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -41,7 +193,11 @@ const Contact = () => {
           LinkedIn
         </a>
       </div>
-      <p className="contact-tagline reveal"><strong>Siza means help.</strong><br/>If you need a developer who builds with purpose and shares everything they know — you've found one.</p>
+
+      <p className="contact-tagline reveal">
+        <strong>Siza means help.</strong><br/>
+        If you need a developer who builds with purpose and shares everything they know — you've found one.
+      </p>
     </section>
   );
 };
