@@ -58,7 +58,7 @@ const Navbar = () => {
       {/* Mobile menu – will be hidden by CSS on large screens */}
       <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
         <a href="/cv.pdf" download className="cv-btn-mobile" onClick={closeMobileMenu}>
-          <span>📄</span> cv
+          <span>📄</span> Download CV
         </a>
         <a href="#story" onClick={closeMobileMenu}>Story</a>
         <a href="#projects" onClick={closeMobileMenu}>Work</a>
