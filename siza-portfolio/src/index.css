@@ -1165,7 +1165,7 @@ footer {
 }
 
 .cv-btn-mobile {
-  display: none;  /* hidden by default, shown only in mobile menu */
+  display: flex;  /* changed from 'none' */
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
@@ -1900,3 +1900,4 @@ footer {
     display: none !important;
   }
 }
+
