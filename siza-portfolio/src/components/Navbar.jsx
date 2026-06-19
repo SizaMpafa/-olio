@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +13,18 @@ const Navbar = () => {
     document.body.style.overflow = !isOpen ? 'hidden' : '';
   };
 
+  // Close menu when screen resizes to > 768px
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768 && isOpen) {
+        closeMobileMenu();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isOpen]);
+
   return (
     <>
       <nav>
@@ -22,7 +34,6 @@ const Navbar = () => {
           closeMobileMenu();
         }}>siza m!</a>
         
-        {/* Desktop: CV button visible in nav */}
         <div className="nav-right">
           <a href="/cv.pdf" download className="cv-btn-desktop">
             <span className="cv-icon">📄</span>
@@ -44,9 +55,8 @@ const Navbar = () => {
         </div>
       </nav>
       
-      {/* Mobile menu */}
+      {/* Mobile menu – will be hidden by CSS on large screens */}
       <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
-        {/* Mobile: CV button at top of menu */}
         <a href="/cv.pdf" download className="cv-btn-mobile" onClick={closeMobileMenu}>
           <span>📄</span> Download CV
         </a>
