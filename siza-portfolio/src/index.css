@@ -1846,6 +1846,29 @@ footer {
       letter-spacing: 0.06em;
     }
   }
+
+  /* ======== DEVICE-SPECIFIC TWEAKS ======== */
+
+  /* Surface Duo (540px) – add ~2–3px more top margin */
+  @media (min-width: 530px) and (max-width: 550px) {
+    .cv-btn-mobile {
+      margin-top: 0.65rem;
+    }
+  }
+
+  /* iPhone SE (375px) – add ~4–5px more top margin */
+  @media (min-width: 370px) and (max-width: 380px) {
+    .cv-btn-mobile {
+      margin-top: 1rem;
+    }
+  }
+
+  /* Galaxy Z Fold 5 (344px) – add horizontal breathing room */
+  @media (min-width: 340px) and (max-width: 350px) {
+    .cv-btn-mobile {
+      margin: 1rem 0.35rem 0.8rem;
+    }
+  }
 }
 
 /* --- Extra small (≤ 380px) --- */
